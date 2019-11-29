@@ -7,7 +7,7 @@ import React, {Component} from 'react';
 const WithFunc = (Comp) => {
     return (props) => {
         console.log('props',props)  // 注意下面的 {...props} 是不能丢的，应为如果 Comp 组件是其他组件的一个子组件，而且父组件给它传递了props，如果此处 没有加 {...props}， 则会导致返回的组件缺少 props
-        return <Comp {...props} intro={'默认简介'} />
+        return <Comp intro={'默认简介'} />
     }
 };
 
@@ -20,7 +20,8 @@ const WithComp = (Comp) => {
         }
         render() {
             return (
-                <Comp auth={'Facebook 创作'}/>
+                // 同理，下面的{...this.props} 也不能够丢
+                <Comp {...this.props} auth={'Facebook 创作'}/>
             )
         }
     }
@@ -58,6 +59,7 @@ function Child(props) {
             {props.name}
             <ul>
                 <li>{props.intro}</li>
+                <li>{props.auth}</li>
             </ul>
         </div>
     )
