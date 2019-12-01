@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>redux原理</title>
+</head>
+<body>
+<div>
+    <button onclick="store.dispatch({type: 'decrease'})"> - </button>
+    <span id="count"> 10 </span>
+    <button onclick="store.dispatch({type: 'increase'})"> + </button>
+</div>
+<script>
+    const countDisplay = document.getElementById('count');
+    const countState = {
+      count: 20
+    };
+
+    const reducers = (state=countState, action) => {
+      if(!state) {
+        return countState
+      }
+      switch(action.type) {
+        case 'decrease':
+          return {
+            ...state,
+            count: state.count - 1
+          };
+        case 'increase':
+          return {
+            ...state,
+            count: state.count + 1
+          };
+        default:
+          return state;
+      }
+    };
+
+    const createStore = (reducer) => {
+      let state = null;
+      let listeners = [];
+      const getState = () => {
+        return state;
+      };
+      const dispatch = (action) => {
+        state = reducer(state, action);
+        listeners.forEach(listener => listener())
+      };
+      const subscribe = (listener) => {
+        listeners.push(listener)
+      };
+      dispatch({});
+      return {
+        getState,
+        dispatch,
+        subscribe
+      }
+    };
+
+    const store = createStore(reducers);
+
+    const render = () => {
+      countDisplay.innerHTML = store.getState().count
+    };
+    render();
+    store.subscribe(render);
+
+</script>
+</body>
+</html>
