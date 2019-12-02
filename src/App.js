@@ -3,7 +3,10 @@ import logo from './logo.svg';
 // import './App.css';
 import {ContextHomePage} from './pages/context & HOC/ContextHomePage'
 import HighOrderComp from "./pages/context & HOC/HighOrderComp";
-import { Redux} from './pages'
+import {
+    Redux,
+    ReactRedux
+} from './pages'
 
 function App(props) {
     return (
@@ -15,7 +18,9 @@ function App(props) {
             {/*<HighOrderComp/>*/}
 
             {/*redux*/}
-            <Redux {...props}/>
+            {/*<Redux {...props}/>*/}
+
+            <ReactRedux />
         </div>
     );
 }
