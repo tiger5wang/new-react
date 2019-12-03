@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 
-export default class SomeComponent extends Component {
+export default class Users extends Component {
 
     constructor(props) {
         super(props);
@@ -11,7 +11,7 @@ export default class SomeComponent extends Component {
     render() {
         return (
             <div>
-
+                用户详情页
             </div>
         )
     }
