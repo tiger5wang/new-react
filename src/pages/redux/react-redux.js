@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
-import {changeCount} from '../actions/cartList'
+import {changeCount, asyncChangeCount} from '../actions/cartList'
 
 
 class ReactRedux extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props)
+        // console.log(this.props)
     }
 
     // changeState = (type, id) => {
@@ -19,34 +19,37 @@ class ReactRedux extends Component {
     // };
 
     render() {
+        console.log(this.props)
         return (
             <div>
                 <table>
                     <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>商品名称</th>
-                        <th>价格</th>
-                        <th>数量</th>
-                        <th>总价</th>
-                    </tr>
+                        <tr>
+                            <th>Id</th>
+                            <th>商品名称</th>
+                            <th>价格</th>
+                            <th>数量</th>
+                            <th>总价</th>
+                        </tr>
                     </thead>
+
                     <tbody>
-                    {this.props.cartList.map(cart => {
-                        return (
-                            <tr key={cart.id}>
-                                <td>{cart.id}</td>
-                                <td>{cart.name}</td>
-                                <td>{cart.price}元/斤</td>
-                                <td>
-                                    <button onClick={this.props.changeCount.bind(this, 'decrease', cart.id)}> - </button>
-                                    <span> {cart.amount}斤 </span>
-                                    <button onClick={this.props.changeCount.bind(this, 'increase', cart.id)}> + </button>
-                                </td>
-                                <td>{(cart.price * cart.amount).toFixed(2)}元</td>
-                            </tr>
-                        )
-                    })}
+                        {this.props.cartList.map(cart => {
+                            return (
+                                <tr key={cart.id}>
+                                    <td>{cart.id}</td>
+                                    <td>{cart.name}</td>
+                                    <td>{cart.price}元/斤</td>
+                                    <td>
+                                        <button onClick={this.props.changeCount.bind(this, 'decrease', cart.id)}> - </button>
+                                        <span> {cart.amount}斤 </span>
+                                        <button onClick={this.props.changeCount.bind(this, 'increase', cart.id)}> + </button>
+                                        <button onClick={this.props.asyncChangeCount.bind(this, 'increase', cart.id)}>延迟执行 + </button>
+                                    </td>
+                                    <td>{(cart.price * cart.amount).toFixed(2)}元</td>
+                                </tr>
+                            )
+                        })}
                     </tbody>
                 </table>
             </div>
@@ -68,7 +71,8 @@ const mapStateToProps = (state) => {
 // 这个方法
 // const mapDispatchToProps = (dispatch) => {
 //     return {
-//         changeState: (type, id) => dispatch(changeCount(type, id))
+//         changeCount: (type, id) => dispatch(changeCount(type, id)),
+//         asyncChangeCount: (type, id) => dispatch(asyncChangeCount(type, id)),
 //     }
 // }
 
@@ -79,4 +83,4 @@ const mapStateToProps = (state) => {
 // export default connect(mapStateToProps, mapDispatchToProps)(ReactRedux)
 
 // 这个使用 action creator 的形式的，要是用 对象的格式 ，action creator 要用 {} 包起来
-export default connect(mapStateToProps, { changeCount })(ReactRedux)
+export default connect(mapStateToProps, { changeCount, asyncChangeCount })(ReactRedux)

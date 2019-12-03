@@ -14,3 +14,21 @@ export const changeCount = (type, id) => {
     }
 }
 
+// 注意如果不是用 中间件 ，action creator 返回的必须是一个对象，如果包含其他的异步函数，需要使用异步中间件来处理
+// 这里先使用 redux-thunk, 注意 dispatch 是在内层的，不是在外层，结合 mapDispatchToProps
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         changeCount: (type, id) => dispatch(changeCount(type, id)),
+//         asyncChangeCount: (type, id) => dispatch(asyncChangeCount(type, id)),
+//     }
+// }
+
+export const asyncChangeCount = (type, id) => dispatch => {
+    setTimeout(() => {
+        return dispatch({
+            type: type,
+            payload: id
+        })
+    }, 1000)
+}
+
