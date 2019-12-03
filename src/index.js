@@ -4,7 +4,8 @@ import App from './App';
 import {Provider} from 'react-redux'
 import store from './pages/store'
 import {BrowserRouter as Router,  Route} from 'react-router-dom'
-
+import zhCN from 'antd/es/locale/zh_CN';
+import { ConfigProvider } from 'antd'
 
 ReactDOM.render(
     // 这里使用 Provider 组件将跟组件包装起来，并且必须要有store 属性，以给所有的组件提供 store 值，
@@ -14,7 +15,9 @@ ReactDOM.render(
         {/*注意根组件需要用 react-router-dom 中的 BrowserRouter 或 HashRouter 包起来*/}
         <Router>
             <Route path={'/'} render={() => {
-                return <App store={store}/>
+                return  <ConfigProvider locale={zhCN}>
+                    <App store={store}/>
+                </ConfigProvider>
             }}/>
         </Router>
     </Provider>,

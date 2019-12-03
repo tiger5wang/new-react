@@ -5,7 +5,8 @@ import HighOrderComp from "./pages/context & HOC/HighOrderComp";
 import {
     Redux,
     ReactRedux,
-    ReactRouter
+    ReactRouter,
+    Antd
 } from './pages'
 import {withRouter} from 'react-router-dom'
 
@@ -25,7 +26,10 @@ function App(props) {
             {/*<ReactRedux />*/}
 
             {/*react-router*/}
-            <ReactRouter {...props}/>
+            {/*<ReactRouter {...props}/>*/}
+
+            {/*antd*/}
+            <Antd/>
         </div>
     );
 }

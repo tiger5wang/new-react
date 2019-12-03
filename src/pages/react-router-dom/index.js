@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Home from './Home';
 import Article from './Article';
 import Users from './Users';
+import NotFount from './NotFount';
 import { Route, Link, NavLink, Switch, Redirect } from 'react-router-dom'
 
 
@@ -23,6 +24,7 @@ export default class ReactRouter extends Component {
                     <li><Link to={'/users'}>用户用户</Link></li>
                 </ul>
                 下面是内容部分：
+                <div style={{height: 50}}></div>
                 {/*注意在 5 以前要用 Switch 组件将所有的 Route 组件包起来，以选择匹配到的组件进行渲染，*/}
                 {/*但是在 5 及以后不用 Switch 组件包起来也可以*/}
                 <Switch>
@@ -34,6 +36,7 @@ export default class ReactRouter extends Component {
                     上面第一个注释的 Route 中的 exact 同理
                     */}
                     <Redirect to={'/home'} from={'/'} exact/>
+                    <Route component={NotFount}/>
                 </Switch>
             </div>
         )
