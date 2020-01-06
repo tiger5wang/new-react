@@ -7,7 +7,8 @@ import {
     Redux,
     ReactRedux,
     ReactRouter,
-    Antd
+    Antd,
+    RefsTransmit
 } from './pages'
 import {withRouter} from 'react-router-dom'
 import MyComponent from "./pages/Refs/MyComponent";
@@ -35,7 +36,8 @@ function App(props) {
             {/*<Antd/>*/}
 
             {/*Refs*/}
-          <MyComponent />
+          {/*<MyComponent />*/}
+          <RefsTransmit/>
         </div>
     );
 }
